@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Table(name="User")
@@ -16,7 +18,7 @@ public class User implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 123450L;
 
 	private Integer id;
 	
@@ -34,7 +36,7 @@ public class User implements Serializable{
 	
 	private String job;
 	
-	private String department;
+	private Department department;
 	
 	private String des;
 	
@@ -115,12 +117,13 @@ public class User implements Serializable{
 		this.job = job;
 	}
 
-	@Column(length=50)
-	public String getDepartment() {
+	@JoinColumn(name="Department_id")
+	@ManyToOne
+	public Department getDepartment() {
 		return department;
 	}
 
-	public void setDepartment(String department) {
+	public void setDepartment(Department department) {
 		this.department = department;
 	}
 
