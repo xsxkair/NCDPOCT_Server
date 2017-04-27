@@ -12,7 +12,7 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	public User userLoginService(String account, String password){
+	public User findUserByAccountAndPasswordService(String account, String password){
 		
 		User user = null;
 		
@@ -22,5 +22,13 @@ public class UserService {
 		user = userRepository.findByAccountAndPassword(account, password);
 
 		return user;
+	}
+	
+	public User modifyUserInfoService(User user){
+		if(user.getId() == null)
+			return null;
+		else{
+			return userRepository.save(user);
+		}
 	}
 }
