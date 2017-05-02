@@ -44,6 +44,10 @@ public class User implements Serializable{
 	
 	private Boolean managereport;
 	
+	private Boolean manageuser;
+	
+	private Boolean managecard;
+	
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Id
 	public Integer getId() {
@@ -117,7 +121,7 @@ public class User implements Serializable{
 		this.job = job;
 	}
 
-	@JoinColumn(name="Department_id")
+	@JoinColumn(name="Department")
 	@ManyToOne
 	public Department getDepartment() {
 		return department;
@@ -151,5 +155,23 @@ public class User implements Serializable{
 
 	public void setManagereport(Boolean managereport) {
 		this.managereport = managereport;
+	}
+
+	@Column(columnDefinition="bit(1) DEFAULT FALSE")
+	public Boolean getManageuser() {
+		return manageuser;
+	}
+
+	public void setManageuser(Boolean manageuser) {
+		this.manageuser = manageuser;
+	}
+
+	@Column(columnDefinition="bit(1) DEFAULT FALSE")
+	public Boolean getManagecard() {
+		return managecard;
+	}
+
+	public void setManagecard(Boolean managecard) {
+		this.managecard = managecard;
 	}
 }

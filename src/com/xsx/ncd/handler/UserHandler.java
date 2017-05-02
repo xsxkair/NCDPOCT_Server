@@ -1,5 +1,7 @@
 package com.xsx.ncd.handler;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,13 +19,31 @@ public class UserHandler {
 	
 	@ResponseBody
 	@RequestMapping(value="/Login")
-	public User userLoginHandler(@RequestBody User user) {
+	public User readUserByPasswordHandler(@RequestBody User user) {
 		return userService.findUserByAccountAndPasswordService(user.getAccount(), user.getPassword());
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/ModifyUserInfo")
-	public User modifyUserInfoHandler(@RequestBody User user) {
-		return userService.modifyUserInfoService(user);
+	@RequestMapping(value="/SaveUser")
+	public User saveUserHandler(@RequestBody User user) {
+		return userService.saveUserService(user);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/DeleteUser")
+	public Boolean deleteUserHandler(@RequestBody User user) {
+		return userService.deleteUserService(user);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/CheckUserIsExist")
+	public Boolean checkUserIsExistHandler(@RequestBody User user) {
+		return userService.checkUserIsExistService(user.getAccount());
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/ReadAllUser")
+	public List<User> readAllUsersHandler(@RequestBody User user) {
+		return userService.readAllUserButOneUserService(user);
 	}
 }
