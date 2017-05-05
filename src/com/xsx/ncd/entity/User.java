@@ -14,42 +14,55 @@ import javax.persistence.Table;
 @Table(name="User")
 @Entity
 public class User implements Serializable{
-	
+
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 123450L;
+	private static final long serialVersionUID = -1366908259106015145L;
 
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Id
 	private Integer id;
 	
+	@Column(nullable=false, unique=true, length=16)
 	private String account;
 	
+	@Column(nullable=false, unique=false, length=16)
 	private String password;
 	
+	@Column(length=16)
 	private String name;
 	
+	@Column(length=16)
 	private String age;
 	
+	@Column(length=16)
 	private String sex;
 	
+	@Column(length=16)
 	private String phone;
 	
 	private String job;
 	
+	@JoinColumn(name="Department")
+	@ManyToOne
 	private Department department;
 	
 	private String des;
 	
+	@Column(columnDefinition="bit(1) DEFAULT FALSE")
 	private Boolean managedevice;
 	
+	@Column(columnDefinition="bit(1) DEFAULT FALSE")
 	private Boolean managereport;
 	
+	@Column(columnDefinition="bit(1) DEFAULT FALSE")
 	private Boolean manageuser;
 	
+	@Column(columnDefinition="bit(1) DEFAULT FALSE")
 	private Boolean managecard;
 	
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Id
 	public Integer getId() {
 		return id;
 	}
@@ -58,7 +71,6 @@ public class User implements Serializable{
 		this.id = id;
 	}
 	
-	@Column(nullable=false, unique=true, length=16)
 	public String getAccount() {
 		return account;
 	}
@@ -67,7 +79,6 @@ public class User implements Serializable{
 		this.account = account;
 	}
 
-	@Column(nullable=false, unique=false, length=16)
 	public String getPassword() {
 		return password;
 	}
@@ -76,7 +87,6 @@ public class User implements Serializable{
 		this.password = password;
 	}
 
-	@Column(length=16)
 	public String getName() {
 		return name;
 	}
@@ -85,7 +95,6 @@ public class User implements Serializable{
 		this.name = name;
 	}
 
-	@Column(length=5)
 	public String getAge() {
 		return age;
 	}
@@ -94,7 +103,6 @@ public class User implements Serializable{
 		this.age = age;
 	}
 
-	@Column(length=2)
 	public String getSex() {
 		return sex;
 	}
@@ -103,7 +111,6 @@ public class User implements Serializable{
 		this.sex = sex;
 	}
 
-	@Column(length=15)
 	public String getPhone() {
 		return phone;
 	}
@@ -112,7 +119,6 @@ public class User implements Serializable{
 		this.phone = phone;
 	}
 
-	@Column(length=25)
 	public String getJob() {
 		return job;
 	}
@@ -121,8 +127,6 @@ public class User implements Serializable{
 		this.job = job;
 	}
 
-	@JoinColumn(name="Department")
-	@ManyToOne
 	public Department getDepartment() {
 		return department;
 	}
@@ -139,7 +143,6 @@ public class User implements Serializable{
 		this.des = des;
 	}
 
-	@Column(columnDefinition="bit(1) DEFAULT FALSE")
 	public Boolean getManagedevice() {
 		return managedevice;
 	}
@@ -148,7 +151,6 @@ public class User implements Serializable{
 		this.managedevice = adddevice;
 	}
 
-	@Column(columnDefinition="bit(1) DEFAULT FALSE")
 	public Boolean getManagereport() {
 		return managereport;
 	}
@@ -157,7 +159,6 @@ public class User implements Serializable{
 		this.managereport = managereport;
 	}
 
-	@Column(columnDefinition="bit(1) DEFAULT FALSE")
 	public Boolean getManageuser() {
 		return manageuser;
 	}
@@ -166,7 +167,6 @@ public class User implements Serializable{
 		this.manageuser = manageuser;
 	}
 
-	@Column(columnDefinition="bit(1) DEFAULT FALSE")
 	public Boolean getManagecard() {
 		return managecard;
 	}

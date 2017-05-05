@@ -15,31 +15,39 @@ import javax.persistence.Table;
 @Entity
 public class Operator implements Serializable{
 	
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 123451L;
+	private static final long serialVersionUID = -2918286652396847269L;
 
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Id
 	private Integer id;
 	
+	@Column(length=16)
 	private String name;
 	
+	@Column(length=16)
 	private String age;
 	
+	@Column(length=16)
 	private String sex;
 	
+	@Column(length=16)
 	private String phone;
 	
 	private String job;
 	
+	@JoinColumn(name="Department")
+	@ManyToOne
 	private Department department;
 	
 	private String des;
 	
+	@Column(columnDefinition="bit(1) DEFAULT FALSE")
 	private Boolean checked;
 
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Id
 	public Integer getId() {
 		return id;
 	}
@@ -48,7 +56,6 @@ public class Operator implements Serializable{
 		this.id = id;
 	}
 
-	@Column(length=16)
 	public String getName() {
 		return name;
 	}
@@ -57,7 +64,6 @@ public class Operator implements Serializable{
 		this.name = name;
 	}
 
-	@Column(length=16)
 	public String getAge() {
 		return age;
 	}
@@ -66,7 +72,6 @@ public class Operator implements Serializable{
 		this.age = age;
 	}
 
-	@Column(length=16)
 	public String getSex() {
 		return sex;
 	}
@@ -75,7 +80,6 @@ public class Operator implements Serializable{
 		this.sex = sex;
 	}
 
-	@Column(length=16)
 	public String getPhone() {
 		return phone;
 	}
@@ -84,7 +88,6 @@ public class Operator implements Serializable{
 		this.phone = phone;
 	}
 
-	@Column(length=16)
 	public String getJob() {
 		return job;
 	}
@@ -93,8 +96,6 @@ public class Operator implements Serializable{
 		this.job = job;
 	}
 
-	@JoinColumn(name="Department")
-	@ManyToOne
 	public Department getDepartment() {
 		return department;
 	}
@@ -111,7 +112,6 @@ public class Operator implements Serializable{
 		this.des = des;
 	}
 
-	@Column(columnDefinition="bit(1) DEFAULT FALSE")
 	public Boolean getChecked() {
 		return checked;
 	}
