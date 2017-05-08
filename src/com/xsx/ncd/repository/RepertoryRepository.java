@@ -8,6 +8,6 @@ import com.xsx.ncd.entity.Repertory;
 
 public interface RepertoryRepository extends JpaRepository<Repertory, Integer> {
 	
-	@Query("select c, sum(r.num) from Repertory r left join Card c on c.lotnum =: lotnum")
+	@Query("select c, sum(r.num) from Repertory r , Card c where c.lotnum=:lotnum and r.card=c")
 	public Object[] findCardInfoAndNumByLot(@Param("lotnum")String lotnum);
 }

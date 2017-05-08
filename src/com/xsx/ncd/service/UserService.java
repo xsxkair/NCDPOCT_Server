@@ -16,14 +16,15 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	private static Logger logger = LoggerFactory.getLogger(UserService.class);
-	
 	public User findUserByAccountAndPasswordService(String account, String password){
 		
 		User user = null;
 		
 		if((account == null) || (password == null))
+		{
+			System.out.println("error");
 			return null;
+		}
 		
 		user = userRepository.findByAccountAndPassword(account, password);
 
@@ -31,23 +32,15 @@ public class UserService {
 	}
 	
 	public User saveUserService(User user){
-		if(user.getId() == null)
-			return null;
-		else{
-			return userRepository.save(user);
-		}
+		return userRepository.save(user);
 	}
 	
 	public Boolean deleteUserService(User user){
 		if(user.getId() == null)
 			return false;
 		else{
-			try {
-				userRepository.delete(user.getId());
-			} catch (Exception e) {
-				logger.error("É¾³ýÓÃ»§", e.toString());
-			}
-
+			userRepository.delete(user.getId());
+			
 			return true;
 		}
 	}

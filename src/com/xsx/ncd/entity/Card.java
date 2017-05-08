@@ -14,9 +14,6 @@ import javax.persistence.Table;
 @Table(name="Card")
 @Entity
 public class Card implements Serializable{
-
-	
-
 	/**
 	 * 
 	 */
@@ -85,4 +82,5 @@ public class Card implements Serializable{
 	public void setVender(String vender) {
 		this.vender = vender;
 	}
+
 }

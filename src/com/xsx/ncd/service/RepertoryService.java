@@ -1,6 +1,6 @@
 package com.xsx.ncd.service;
 
-import java.util.Map;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,5 +29,9 @@ public class RepertoryService {
 	
 	public Object[] readRepertoryInfoByCardLotService(String lotnum){
 		return repertoryRepository.findCardInfoAndNumByLot(lotnum);
+	}
+	
+	public List<String> queryAllLotnumLikeThisLotnum(String lotnum){
+		return cardRepository.findLotnumByLotnumLike(lotnum);
 	}
 }

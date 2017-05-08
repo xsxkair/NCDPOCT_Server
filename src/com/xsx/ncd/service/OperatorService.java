@@ -36,9 +36,9 @@ public class OperatorService {
 	}
 	
 	public Boolean checkOperatorIsExistService(Operator operator){
-		if(operatorRepository.findByNameAndDepartment(operator.getName(), operator.getDepartment()) == null)
-			return false;
-		else
+		if(operatorRepository.findByNameAndDepartment(operator.getName(), operator.getDepartment()).size() > 0)
 			return true;
+		else
+			return false;
 	}
 }

@@ -3,15 +3,10 @@
 	
    <!--先定义所有的appender-->    
     <appenders>
-        <RollingRandomAccessFile name="xsxLog" fileName="${sys:catalina.home}/logs/xsx.log"
-             filePattern="${sys:catalina.home}/logs/xsx-%d{yyyy-MM-dd}-%i.log">
+        <RollingRandomAccessFile name="xsxPoctLog" fileName="${sys:catalina.home}/logs/xsxPoct.log"
+             filePattern="${sys:catalina.home}/logs/xsxPoct-%d{yyyy-MM-dd}.log">
             <PatternLayout
 				pattern="%d{yyyy-MM-dd HH:mm:ss} %F%L %m%n " />
-            <Policies>  
-                <TimeBasedTriggeringPolicy interval="1" />  
-                <SizeBasedTriggeringPolicy size="10 MB" />  
-            </Policies>  
-            <DefaultRolloverStrategy max="20" />
         </RollingRandomAccessFile>
         
     </appenders>    
@@ -19,7 +14,7 @@
     <loggers>
 
         <root level="error" additivity="false">  
-        	<appender-ref ref="xsxLog" />
+        	<appender-ref ref="xsxPoctLog" />
     	</root>  
     </loggers>
 </configuration>  
