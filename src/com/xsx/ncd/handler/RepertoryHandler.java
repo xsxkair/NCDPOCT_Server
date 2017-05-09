@@ -1,11 +1,14 @@
 package com.xsx.ncd.handler;
 
+import java.math.BigInteger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.xsx.ncd.entity.Card;
 import com.xsx.ncd.entity.Repertory;
 import com.xsx.ncd.service.RepertoryService;
 
@@ -21,8 +24,8 @@ public class RepertoryHandler {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/ReadRepertoryInfo")
-	public Object[] readRepertoryInfoByCardLotHandler(@RequestBody String lotnum) {
-		return repertoryService.readRepertoryInfoByCardLotService(lotnum);
+	@RequestMapping(value="/QueryRepertoryNumByCard")
+	public Long queryRepertoryNumByCard(@RequestBody Card card) {
+		return repertoryService.queryRepertoryNumByCardService(card);
 	}
 }

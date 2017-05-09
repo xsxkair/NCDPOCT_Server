@@ -20,13 +20,13 @@ public class CardHandler {
 	
 	@ResponseBody
 	@RequestMapping(value="/QueryCardLotNumLikeThis")
-	public List<String> queryCardLotNumLikeThisHandler(@RequestBody String lotnum) {
-		return cardService.queryAllLotnumLikeThisLotnumService(lotnum);
+	public List<String> queryCardLotNumLikeThisHandler(@RequestBody Object lot) {
+		return cardService.queryAllLotnumLikeThisLotnumService((String) lot);
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="/QueryCardByLotNum")
-	public Card queryCardByLotNumHandler(@RequestBody String lotnum) {
-		return cardService.queryCardByLotNumService(lotnum);
+	public Card queryCardByLotNumHandler(@RequestBody Object card) {
+		return cardService.queryCardByLotNumService((String) card);
 	}
 }

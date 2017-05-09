@@ -27,8 +27,8 @@ public class RepertoryService {
 		return repertoryRepository.save(repertory);
 	}
 	
-	public Object[] readRepertoryInfoByCardLotService(String lotnum){
-		return repertoryRepository.findCardInfoAndNumByLot(lotnum);
+	public Long queryRepertoryNumByCardService(Card card){
+		return repertoryRepository.findCardInfoAndNumByCard(card);
 	}
 	
 	public List<String> queryAllLotnumLikeThisLotnum(String lotnum){

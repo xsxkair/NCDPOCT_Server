@@ -42,8 +42,14 @@ public class UserHandler {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/ReadAllUser")
-	public List<User> readAllUsersHandler(@RequestBody User user) {
+	@RequestMapping(value="/ReadAllOtherUser")
+	public List<User> readAllOtherUserHandler(@RequestBody User user) {
 		return userService.readAllUserButOneUserService(user);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/ReadAllUser")
+	public List<User> readAllUsersHandler() {
+		return userService.readAllUserService();
 	}
 }

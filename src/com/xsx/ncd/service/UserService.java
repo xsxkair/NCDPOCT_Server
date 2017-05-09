@@ -55,4 +55,8 @@ public class UserService {
 	public List<User> readAllUserButOneUserService(User user){
 		return userRepository.readAllUserButOneUser(user.getAccount());
 	}
+	
+	public List<User> readAllUserService(){
+		return userRepository.findAll();
+	}
 }
