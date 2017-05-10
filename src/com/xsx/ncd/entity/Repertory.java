@@ -1,6 +1,5 @@
 package com.xsx.ncd.entity;
 
-import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,13 +11,8 @@ import javax.persistence.Table;
 
 @Table(name="Repertory")
 @Entity
-public class Repertory implements Serializable{
+public class Repertory {
 
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2090918329914690883L;
 
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Id

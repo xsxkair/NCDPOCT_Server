@@ -1,6 +1,5 @@
 package com.xsx.ncd.entity;
 
-import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,12 +11,7 @@ import javax.persistence.Table;
 
 @Table(name="DepartmentRepertory")
 @Entity
-public class DepartmentRepertory implements Serializable{
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -4379973936524356665L;
+public class DepartmentRepertory {
 
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Id

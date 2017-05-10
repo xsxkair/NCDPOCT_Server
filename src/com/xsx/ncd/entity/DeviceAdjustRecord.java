@@ -1,6 +1,5 @@
 package com.xsx.ncd.entity;
 
-import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,12 +11,8 @@ import javax.persistence.Table;
 
 @Table(name="DeviceAdjustRecord")
 @Entity
-public class DeviceAdjustRecord implements Serializable{
+public class DeviceAdjustRecord {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -5641089533071073033L;
 
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Id

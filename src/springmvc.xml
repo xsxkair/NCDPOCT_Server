@@ -21,15 +21,7 @@
 		<property name="maxUploadSize" value="314572800" />
      	<property name="maxInMemorySize" value="40960" />
      	<property name="defaultEncoding" value="UTF-8"></property>
-    </bean>  
-	
-	<!-- 直接跳转到用户信息修改界面，不经过handler -->
-	<mvc:view-controller path="/ReLogin" view-name="Login"/>
-	<mvc:view-controller path="/ModifyUser" view-name="MUserInfo"/>
-	<mvc:view-controller path="/ModifyUserPassword" view-name="MUserPass"/>
-	<mvc:view-controller path="/Home" view-name="Home"/>
-	<mvc:view-controller path="/UpClientSoft" view-name="UpSoft"/>
-	<mvc:view-controller path="/DownClientSoft" view-name="DownClientSoft"/>
+    </bean>
 
 	<mvc:default-servlet-handler /> 
 	<mvc:annotation-driven />    

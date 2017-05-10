@@ -1,7 +1,5 @@
 package com.xsx.ncd.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,13 +11,8 @@ import javax.persistence.Table;
 
 @Table(name="Operator")
 @Entity
-public class Operator implements Serializable{
-	
+public class Operator {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2918286652396847269L;
 
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Id

@@ -1,6 +1,5 @@
 package com.xsx.ncd.entity;
 
-import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,12 +12,7 @@ import javax.persistence.Table;
 
 @Table(name="NCD_YGFXY")
 @Entity
-public class NCD_YGFXY implements Serializable{
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -5122835984140670552L;
+public class NCD_YGFXY {
 
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Id

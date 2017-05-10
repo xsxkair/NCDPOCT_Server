@@ -1,8 +1,5 @@
 package com.xsx.ncd.entity;
 
-import java.io.Serializable;
-import java.sql.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,11 +10,7 @@ import javax.persistence.Table;
 
 @Table(name="Card")
 @Entity
-public class Card implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3043140969197987478L;
+public class Card {
 
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Id

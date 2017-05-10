@@ -1,7 +1,5 @@
 package com.xsx.ncd.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,13 +10,8 @@ import javax.persistence.Table;
 
 @Table(name="DeviceQualityRecord")
 @Entity
-public class DeviceQualityRecord implements Serializable{
+public class DeviceQualityRecord {
 
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 6010270144998296889L;
 
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Id

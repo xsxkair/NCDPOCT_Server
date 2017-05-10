@@ -1,9 +1,9 @@
 package com.xsx.ncd.entity;
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,30 +12,26 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Table(name="Device")
 @Entity
-public class Device implements Serializable{
+public class Device {
 
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 4205891974622255900L;
 
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Id
 	private Integer id;
 	
+	@Column(nullable=false)
 	private String did;
 	
-	@JoinColumn(name="DeviceType")
-	@ManyToOne
-	private DeviceType devicetype;
+	@Column(nullable=false)
+	private String name;
 	
 	private String status;
+	
+	private String icopath;
 	
 	private Long lasttime;
 	
@@ -50,11 +46,24 @@ public class Device implements Serializable{
 	)
 	private Set<Operator> operators = new HashSet<>();
 	
+	@ManyToMany
+    @JoinTable(name = "Device_Item",
+            joinColumns = { @JoinColumn(name = "device", referencedColumnName = "id") },
+            inverseJoinColumns = { @JoinColumn(name = "item", referencedColumnName = "id") }
+	)
+	private Set<Item> items = new HashSet<>();
+	
 	@JoinColumn(name="Department")
 	@ManyToOne
 	private Department department;
 	
 	private String addr;
+	
+	private String vender;
+	
+	private String venderphone;
+	
+	private String venderaddr;
 
 	public Integer getId() {
 		return id;
@@ -72,12 +81,52 @@ public class Device implements Serializable{
 		this.did = did;
 	}
 
-	public DeviceType getDevicetype() {
-		return devicetype;
+	public String getName() {
+		return name;
 	}
 
-	public void setDevicetype(DeviceType devicetype) {
-		this.devicetype = devicetype;
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getIcopath() {
+		return icopath;
+	}
+
+	public void setIcopath(String icopath) {
+		this.icopath = icopath;
+	}
+
+	public Set<Item> getItems() {
+		return items;
+	}
+
+	public void setItems(Set<Item> items) {
+		this.items = items;
+	}
+
+	public String getVender() {
+		return vender;
+	}
+
+	public void setVender(String vender) {
+		this.vender = vender;
+	}
+
+	public String getVenderphone() {
+		return venderphone;
+	}
+
+	public void setVenderphone(String venderphone) {
+		this.venderphone = venderphone;
+	}
+
+	public String getVenderaddr() {
+		return venderaddr;
+	}
+
+	public void setVenderaddr(String venderaddr) {
+		this.venderaddr = venderaddr;
 	}
 
 	public String getStatus() {
