@@ -29,6 +29,8 @@ public class Device {
 	@Column(nullable=false)
 	private String name;
 	
+	private String model;
+	
 	private String status;
 	
 	private String icopath;
@@ -87,6 +89,14 @@ public class Device {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
 	}
 
 	public String getIcopath() {

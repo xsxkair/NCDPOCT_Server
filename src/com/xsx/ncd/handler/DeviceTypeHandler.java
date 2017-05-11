@@ -66,10 +66,10 @@ public class DeviceTypeHandler {
 			//通过CommonsMultipartFile的方法直接写文件（注意这个时候）
 			errorIcoFile.transferTo(newFile3);
 			
-			deviceType.setOfficon(offPath);
+/*			deviceType.setOfficon(offPath);
 			deviceType.setOnicon(onPath);
 			deviceType.setErroricon(errorPath);
-			deviceRepository.save(deviceType);
+			deviceRepository.save(deviceType);*/
 			
 			return true;
 			

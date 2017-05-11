@@ -22,12 +22,14 @@ public class UserService {
 		
 		if((account == null) || (password == null))
 		{
-			System.out.println("error");
 			return null;
 		}
 		
 		user = userRepository.findByAccountAndPassword(account, password);
-
+		if(user == null)
+			System.out.println("¿Õ");
+		else
+			System.out.println("·Ç¿Õ");
 		return user;
 	}
 	
