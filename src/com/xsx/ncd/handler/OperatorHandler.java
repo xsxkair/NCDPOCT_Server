@@ -8,13 +8,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.xsx.ncd.entity.Department;
 import com.xsx.ncd.entity.Operator;
+import com.xsx.ncd.repository.OperatorRepository;
 import com.xsx.ncd.service.OperatorService;
 
 @Controller
 public class OperatorHandler {
 
 	@Autowired OperatorService operatorService;
+	@Autowired OperatorRepository operatorRepository;
 	
 	@ResponseBody
 	@RequestMapping(value="/ReadAllOperator")
@@ -50,5 +53,11 @@ public class OperatorHandler {
 	@RequestMapping(value="/CheckOperatorIsExist")
 	public Boolean checkOperatorIsExistHandler(@RequestBody Operator operator) {
 		return operatorService.checkOperatorIsExistService(operator);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/QueryOperatorByDepartment")
+	public List<Operator> queryOperatorByDepartmentHandler(@RequestBody Department department) {
+		return operatorRepository.findByDepartment(department);
 	}
 }
