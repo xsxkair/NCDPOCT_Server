@@ -90,14 +90,14 @@ public class DeviceTypeHandler {
 	}
 	
 	@RequestMapping("/DownloadDeviceIco")
-	public void  downloadDeviceIcoHandler(@RequestParam("icoUrl")String icoUrl, 
+	public void  downloadDeviceIcoHandler(@RequestBody String icoUrl, 
             HttpServletResponse response) throws IOException{
 
         BufferedInputStream bis = null; 
         BufferedOutputStream bos = null; 
 
         //获取下载文件露肩
-        String downLoadPath = "/var/NCDPOCT/DeviceIco/" + icoUrl; 
+        String downLoadPath = icoUrl; 
         
         //待下载文件
         File file = new File(downLoadPath);
