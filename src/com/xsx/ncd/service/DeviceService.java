@@ -17,4 +17,32 @@ public class DeviceService {
 	public List<Device> queryAllDeviceByDepartmentService(Department department){
 		return deviceRepository.findByDepartment(department);
 	}
+	
+	public Device queryDeviceInfoService(String deviceId){
+		
+		Device tempDevice = deviceRepository.findByDid(deviceId);
+		
+		if(tempDevice != null){
+			tempDevice.setLasttime(System.currentTimeMillis());
+			deviceRepository.save(tempDevice);
+		}
+		
+		return tempDevice;
+	}
+	
+	public String refreshDeviceOnLineStatusService(String deviceId){
+		
+		Device tempDevice = deviceRepository.findByDid(deviceId);
+		
+		if(tempDevice != null){
+			tempDevice.setLasttime(System.currentTimeMillis());
+			deviceRepository.save(tempDevice);
+			
+			return "Success!";
+		}
+		else {
+			return "Fail!";
+		}
+	}
+	
 }

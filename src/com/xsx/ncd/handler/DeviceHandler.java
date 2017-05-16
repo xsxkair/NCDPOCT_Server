@@ -1,24 +1,13 @@
 package com.xsx.ncd.handler;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xsx.ncd.entity.Department;
 import com.xsx.ncd.entity.Device;
 import com.xsx.ncd.repository.DeviceRepository;
@@ -67,5 +56,21 @@ public class DeviceHandler {
 			e.printStackTrace();
 			return "Fail"+e.getMessage();
 		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/QueryDeviceInfo")
+	public Device queryDeviceInfoHandler(String deviceId) {
+		
+		return deviceService.queryDeviceInfoService(deviceId);
+	
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/RefreshDeviceStatus")
+	public String refreshDeviceOnLineStatusHandler(String deviceId) {
+		
+		return deviceService.refreshDeviceOnLineStatusService(deviceId);
+	
 	}
 }

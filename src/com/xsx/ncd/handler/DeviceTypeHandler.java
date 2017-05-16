@@ -1,5 +1,7 @@
 package com.xsx.ncd.handler;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -7,6 +9,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,8 @@ import com.xsx.ncd.entity.Device;
 import com.xsx.ncd.entity.DeviceType;
 import com.xsx.ncd.repository.DeviceRepository;
 import com.xsx.ncd.repository.DeviceTypeRepository;
+
+import net.coobird.thumbnailator.Thumbnails;
 
 @Controller
 public class DeviceTypeHandler {
@@ -51,6 +56,13 @@ public class DeviceTypeHandler {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value="/QueryAllDeviceIcoPath")
+	public List<String> queryAllDeviceIcoPathHandler() {
+		 
+		return deviceTypeRepository.findAllIcoPath();
+	}
+	
+	@ResponseBody
 	@RequestMapping("/SaveDeviceTypeAndIco")
 	public String saveDeviceTypeAndIcoHandler(@RequestParam("deviceType")String deviceTypeInfo,
 			@RequestParam("ico") CommonsMultipartFile offIcoFile){
@@ -74,8 +86,10 @@ public class DeviceTypeHandler {
 				direct2.mkdir();
 
 			File newFile1=new File(offPath);
-			//通过CommonsMultipartFile的方法直接写文件（注意这个时候）
-			offIcoFile.transferTo(newFile1);
+			Thumbnails.of(offIcoFile.getInputStream())
+			.width(100)
+			.toFile(newFile1);
+			//offIcoFile.transferTo(newFile1);
 			
 			deviceType.setIcon(offPath);
 			deviceTypeRepository.save(deviceType);

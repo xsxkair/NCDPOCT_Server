@@ -6,4 +6,5 @@ import com.xsx.ncd.entity.Item;
 
 public interface ItemRepository extends JpaRepository<Item, Integer> {
 
+	public Item findByCode(String code);
 }

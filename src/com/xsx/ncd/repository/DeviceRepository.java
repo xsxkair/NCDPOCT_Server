@@ -10,4 +10,6 @@ import com.xsx.ncd.entity.Device;
 public interface DeviceRepository extends JpaRepository<Device, Integer> {
 
 	public List<Device> findByDepartment(Department department);
+	
+	public Device findByDid(String did);
 }
