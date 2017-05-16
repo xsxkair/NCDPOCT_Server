@@ -2,6 +2,7 @@ package com.xsx.ncd.handler;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +27,7 @@ public class DeviceErrorRecordHandler {
 	
 	@ResponseBody
 	@RequestMapping("/QueryDeviceErrorRecord")
-	public List<DeviceErrorRecord> queryDeviceErrorRecordHandler(Date date, String operatorName, String deviceId,
+	public Map<String, Object> queryDeviceErrorRecordHandler(Date date, String operatorName, String deviceId,
 			Integer errorCode, int startIndex, int size){
 		System.out.println(date);
 		System.out.println(operatorName);
