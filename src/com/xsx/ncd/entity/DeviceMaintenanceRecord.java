@@ -27,6 +27,8 @@ public class DeviceMaintenanceRecord {
 	@ManyToOne
 	private Operator operator;
 	
+	private String result;
+	
 	private String dsc;
 
 	public Integer getId() {
@@ -59,6 +61,14 @@ public class DeviceMaintenanceRecord {
 
 	public void setOperator(Operator operator) {
 		this.operator = operator;
+	}
+
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
 	}
 
 	public String getDsc() {

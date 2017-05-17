@@ -99,6 +99,5 @@ public class DeviceAdjustRecord {
 	public void setDsc(String dsc) {
 		this.dsc = dsc;
 	}
-	
-	
 }
+
