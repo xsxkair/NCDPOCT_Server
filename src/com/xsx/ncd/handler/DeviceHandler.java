@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.xsx.ncd.define.DeviceItem;
 import com.xsx.ncd.entity.Department;
 import com.xsx.ncd.entity.Device;
 import com.xsx.ncd.repository.DeviceRepository;
@@ -23,6 +24,12 @@ public class DeviceHandler {
 	@RequestMapping(value="/QueryThisDepartmentAllDeviceList")
 	public List<Device> queryThisDepartmentAllDeviceListHandler(@RequestBody Department department) {
 		return deviceService.queryAllDeviceByDepartmentService(department);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/QueryAllDeviceInSample")
+	public List<DeviceItem> queryAllDeviceInSampleHandler(String departmentName, String deviceId) {
+		return deviceService.QueryAllDeviceInSample(departmentName, deviceId);
 	}
 	
 	@ResponseBody
