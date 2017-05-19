@@ -6,8 +6,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.xsx.ncd.define.DeviceItem;
+import com.xsx.ncd.define.DeviceReportItem;
+import com.xsx.ncd.define.RecordJson;
 import com.xsx.ncd.entity.Device;
 import com.xsx.ncd.entity.DeviceType;
+import com.xsx.ncd.entity.NCD_XTY;
+import com.xsx.ncd.entity.NCD_YGFXY;
 import com.xsx.ncd.repository.DeviceRepository;
 import com.xsx.ncd.repository.DeviceTypeRepository;
 import com.xsx.ncd.repository.NCD_XTYRepository;
@@ -79,5 +84,51 @@ public class ReportService {
 		datas.add(device.getLasttime());
 		
 		return datas;
+	}
+	
+	public RecordJson<DeviceReportItem> queryDeviceReportNotHandledService(Integer id){
+		
+		RecordJson<DeviceReportItem> recordJson = new RecordJson<>();
+		List<DeviceReportItem> deviceItems = new ArrayList<>();
+		
+		//查询设备在线时间
+		Device device = deviceRepository.findOne(id);
+		
+		//查询设备未审核报告
+		switch (device.getDeviceType().getCode()) {
+		
+		case "NCD_YGFXY":
+			List<NCD_YGFXY> NCD_YGFXYLists = ncd_YGFXYRepository.findThisDeviceNotHandledReportList(device.getDid());
+			
+			for (NCD_YGFXY ncd_YGFXY : NCD_YGFXYLists) {
+				DeviceReportItem deviceReportItem = new DeviceReportItem(ncd_YGFXY.getId(), ncd_YGFXY.getTesttime(), ncd_YGFXY.getUptime(), ncd_YGFXY.getSampleid(),
+						null);
+				if(ncd_YGFXY.getOperator() != null)
+					deviceReportItem.setOperatorName(ncd_YGFXY.getOperator().getName());
+				
+				deviceItems.add(deviceReportItem);
+			}
+			break;
+
+		case "NCD_XTY":
+			List<NCD_XTY> NCD_XTYLists = ncd_XTYRepository.findThisDeviceNotHandledReportList(device.getDid());
+			for (NCD_XTY ncd_XTY : NCD_XTYLists) {
+				DeviceReportItem deviceReportItem = new DeviceReportItem(ncd_XTY.getId(), ncd_XTY.getTesttime(), ncd_XTY.getUptime(), ncd_XTY.getSampleid(),
+						null);
+				if(ncd_XTY.getOperator() != null)
+					deviceReportItem.setOperatorName(ncd_XTY.getOperator().getName());
+				
+				deviceItems.add(deviceReportItem);
+			}
+			break;
+
+		default:
+			break;
+		}
+		
+		recordJson.setParm1(device.getLasttime());
+		recordJson.setRecords(deviceItems);
+		
+		return recordJson;
 	}
 }

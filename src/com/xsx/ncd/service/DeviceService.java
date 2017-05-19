@@ -67,7 +67,7 @@ public class DeviceService {
 		
 		for (Device device : page) {
 			DeviceItem deviceItem = new DeviceItem(device.getId(), null, device.getDid(), null, null, 
-					device.getLasttime(), null);
+					device.getLasttime(), null, device.getAddr());
 			
 			if(device.getDepartment() != null){
 				deviceItem.setDepartmentName(device.getDepartment().getName());
