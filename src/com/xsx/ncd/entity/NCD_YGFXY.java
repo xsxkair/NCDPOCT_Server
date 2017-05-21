@@ -247,8 +247,5 @@ public class NCD_YGFXY {
 
 	public void setReportdsc(String reportdsc) {
 		this.reportdsc = reportdsc;
-	}
-	
-	
-	
+	}	
 }

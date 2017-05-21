@@ -16,6 +16,7 @@ public class NCD_YGFXYHandler {
 	@ResponseBody
 	@RequestMapping("/YGFXY_Data")
 	public String upLoadYGFXYDataHandler(NCD_YGFXY ncd_YGFXY, String itemCode, Integer userId, String deviceId){
+		System.out.println(deviceId);
 		return ncd_YGFXYService.upLoadYGFXYDataService(ncd_YGFXY, itemCode, userId, deviceId);
 	}
 	
