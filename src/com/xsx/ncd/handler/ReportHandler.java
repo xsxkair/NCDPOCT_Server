@@ -40,4 +40,10 @@ public class ReportHandler {
 	public RecordJson<DeviceReportItem> queryDeviceReportNotHandledHandler(Integer id) {
 		return reportService.queryDeviceReportNotHandledService(id);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/queryDeviceReport")
+	public Object queryDeviceReportHandler(String deviceType, Integer reportId) {
+		return reportService.queryDeviceReportService(deviceType, reportId);
+	}
 }

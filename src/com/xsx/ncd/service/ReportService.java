@@ -131,4 +131,24 @@ public class ReportService {
 		
 		return recordJson;
 	}
+	
+	public Object queryDeviceReportService(String deviceType, Integer reportId){
+		
+		//查询设备未审核报告
+		switch (deviceType) {
+		
+		case "NCD_YGFXY":
+			NCD_YGFXY ncd_YGFXY = ncd_YGFXYRepository.findOne(reportId);
+			return ncd_YGFXY;
+
+		case "NCD_XTY":
+			NCD_XTY ncd_XTY = ncd_XTYRepository.findOne(reportId);
+			return ncd_XTY;
+
+		default:
+			break;
+		}
+
+		return null;
+	}
 }
