@@ -3,10 +3,12 @@ package com.xsx.ncd.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.xsx.ncd.entity.Card;
 import com.xsx.ncd.entity.Device;
 import com.xsx.ncd.entity.Item;
 import com.xsx.ncd.entity.NCD_YGFXY;
 import com.xsx.ncd.entity.Operator;
+import com.xsx.ncd.repository.CardRepository;
 import com.xsx.ncd.repository.DeviceRepository;
 import com.xsx.ncd.repository.DeviceTypeRepository;
 import com.xsx.ncd.repository.ItemRepository;
@@ -21,6 +23,7 @@ public class NCD_YGFXYService {
 	@Autowired ItemRepository itemRepository;
 	@Autowired DeviceRepository deviceRepository;
 	@Autowired DeviceTypeRepository deviceTypeRepository;
+	@Autowired CardRepository cardRepository;
 	
 	public String upLoadYGFXYDataService(NCD_YGFXY ncd_YGFXY, String itemCode, Integer userId, String deviceId){
 		Item item = itemRepository.findByCode(itemCode);

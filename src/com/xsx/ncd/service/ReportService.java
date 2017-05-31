@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.xsx.ncd.define.DeviceItem;
+import com.xsx.ncd.define.DeviceJson;
 import com.xsx.ncd.define.DeviceReportItem;
 import com.xsx.ncd.define.RecordJson;
 import com.xsx.ncd.entity.Device;
@@ -132,23 +132,4 @@ public class ReportService {
 		return recordJson;
 	}
 	
-	public Object queryDeviceReportService(String deviceType, Integer reportId){
-		
-		//查询设备未审核报告
-		switch (deviceType) {
-		
-		case "NCD_YGFXY":
-			NCD_YGFXY ncd_YGFXY = ncd_YGFXYRepository.findOne(reportId);
-			return ncd_YGFXY;
-
-		case "NCD_XTY":
-			NCD_XTY ncd_XTY = ncd_XTYRepository.findOne(reportId);
-			return ncd_XTY;
-
-		default:
-			break;
-		}
-
-		return null;
-	}
 }

@@ -29,7 +29,7 @@ public class DeviceType {
 	private String name;
 	
 	@Column(nullable=false)
-	private String model;
+	private String model;												//ÐÍºÅ
 	
 	private String icon;
 	

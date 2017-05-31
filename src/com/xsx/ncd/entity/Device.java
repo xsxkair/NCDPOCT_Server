@@ -51,7 +51,9 @@ public class Device {
 	private DeviceType deviceType;
 	
 	private String addr;
-
+	
+	private Long modifyTimeStamp;							//设备信息最后修改时间，为System.CurrentMils/1000去整，即精确到秒
+	
 	public Integer getId() {
 		return id;
 	}
@@ -122,6 +124,14 @@ public class Device {
 
 	public void setDeviceType(DeviceType deviceType) {
 		this.deviceType = deviceType;
+	}
+
+	public Long getModifyTimeStamp() {
+		return modifyTimeStamp;
+	}
+
+	public void setModifyTimeStamp(Long modifyTimeStamp) {
+		this.modifyTimeStamp = modifyTimeStamp;
 	}
 	
 }

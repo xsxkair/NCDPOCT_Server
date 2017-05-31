@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import com.xsx.ncd.define.DeviceItem;
+import com.xsx.ncd.define.DeviceJson;
 import com.xsx.ncd.entity.Department;
 import com.xsx.ncd.entity.Device;
 import com.xsx.ncd.repository.DeviceRepository;
@@ -27,7 +27,7 @@ public class DeviceService {
 		return deviceRepository.findByDepartment(department);
 	}
 	
-	public List<DeviceItem> QueryAllDeviceInSample(String departmentName, String deviceId){
+	public List<DeviceJson> QueryAllDeviceInSample(String departmentName, String deviceId){
 		
 		Specification<Device> specification = new Specification<Device>() {
 			/**
@@ -63,10 +63,10 @@ public class DeviceService {
 		};
 
 		List<Device> page = deviceRepository.findAll(specification);
-		List<DeviceItem> deviceItems = new ArrayList<>();
+		List<DeviceJson> deviceItems = new ArrayList<>();
 		
 		for (Device device : page) {
-			DeviceItem deviceItem = new DeviceItem(device.getId(), null, device.getDid(), null, null, 
+			DeviceJson deviceItem = new DeviceJson(device.getId(), null, device.getDid(), null, null, null, 
 					device.getLasttime(), null, device.getAddr());
 			
 			if(device.getDepartment() != null){
@@ -77,6 +77,7 @@ public class DeviceService {
 				deviceItem.setDeviceTypeCode(device.getDeviceType().getCode());
 				deviceItem.setName(device.getDeviceType().getName());
 				deviceItem.setIco(device.getDeviceType().getIcon());
+				deviceItem.setModel(device.getDeviceType().getModel());
 			}
 			
 			deviceItems.add(deviceItem);
@@ -85,16 +86,30 @@ public class DeviceService {
 		return deviceItems;
 	}
 	
-	public Device queryDeviceInfoService(String deviceId){
+	public List<DeviceJson> QueryAllDeviceByDepartmentInSampleService(Department department){
 		
-		Device tempDevice = deviceRepository.findByDid(deviceId);
+		List<Device> devices = deviceRepository.findByDepartment(department);
+		List<DeviceJson> deviceItems = new ArrayList<>();
 		
-		if(tempDevice != null){
-			tempDevice.setLasttime(System.currentTimeMillis());
-			deviceRepository.save(tempDevice);
+		for (Device device : devices) {
+			DeviceJson deviceItem = new DeviceJson(device.getId(), null, device.getDid(), null, null, null, 
+					device.getLasttime(), null, device.getAddr());
+			
+			if(device.getDepartment() != null){
+				deviceItem.setDepartmentName(device.getDepartment().getName());
+			}
+			
+			if(device.getDeviceType() != null){
+				deviceItem.setDeviceTypeCode(device.getDeviceType().getCode());
+				deviceItem.setName(device.getDeviceType().getName());
+				deviceItem.setIco(device.getDeviceType().getIcon());
+				deviceItem.setModel(device.getDeviceType().getModel());
+			}
+			
+			deviceItems.add(deviceItem);
 		}
 		
-		return tempDevice;
+		return deviceItems;
 	}
 	
 	public String refreshDeviceOnLineStatusService(String deviceId){
@@ -111,5 +126,5 @@ public class DeviceService {
 			return "Fail!";
 		}
 	}
-	
+
 }
