@@ -17,4 +17,6 @@ public interface OperatorRepository extends JpaRepository<Operator, Integer>{
 	
 	@Query("SELECT o FROM Operator o where o.id in (:ids) ")
 	public List<Operator> findByids(@Param("ids") List<Integer> ids);
+	
+	public Operator findByDepartmentAndName(Department department, String name);
 }

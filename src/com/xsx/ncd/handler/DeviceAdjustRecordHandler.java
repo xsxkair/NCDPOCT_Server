@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xsx.ncd.define.AdjustRecordItem;
-import com.xsx.ncd.define.ErrorRecordItem;
 import com.xsx.ncd.define.RecordJson;
 import com.xsx.ncd.entity.DeviceAdjustRecord;
 import com.xsx.ncd.service.DeviceAdjustRecordService;
@@ -20,10 +19,10 @@ public class DeviceAdjustRecordHandler {
 	
 	@ResponseBody
 	@RequestMapping("/UpLoadDeviceAdjust")
-	public String upLoadDeviceAdjustRecordHandler(DeviceAdjustRecord deviceAdjustRecord, String deviceId,
-			Integer operatorId){
+	public DeviceAdjustRecord upLoadDeviceAdjustRecordHandler(DeviceAdjustRecord deviceAdjustRecord, String deviceId,
+			String operatorName){
 		
-		return deviceAdjustRecordService.upLoadDeviceAdjustRecordHandler(deviceAdjustRecord, deviceId, operatorId);
+		return deviceAdjustRecordService.upLoadDeviceAdjustRecordHandler(deviceAdjustRecord, deviceId, operatorName);
 	}
 	
 	@ResponseBody

@@ -1,13 +1,8 @@
 package com.xsx.ncd.handler;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Date;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,8 +21,6 @@ public class DeviceHandler {
 
 	@Autowired DeviceService deviceService;
 	@Autowired DeviceRepository deviceRepository;
-	
-	private SimpleDateFormat dateTimeFormat = new SimpleDateFormat( "yyyyMMddHHmmss");
 	
 	@ResponseBody
 	@RequestMapping(value="/QueryThisDepartmentAllDeviceList")
@@ -66,6 +59,8 @@ public class DeviceHandler {
 		
 		try {
 			if(device.getId() == null){
+				device.setLasttime(System.currentTimeMillis());
+				device.setModifyTimeStamp(device.getLasttime()/1000);
 				deviceRepository.save(device);
 	
 				return "Success!";
@@ -87,6 +82,7 @@ public class DeviceHandler {
 		if(device.getId() == null)
 			return "Error, Device is not exist!";
 		else{
+			device.setModifyTimeStamp(System.currentTimeMillis()/1000);
 			deviceRepository.save(device);
 			return "Success";
 		}
@@ -95,9 +91,7 @@ public class DeviceHandler {
 	@ResponseBody
 	@RequestMapping(value="/QueryDeviceByDeviceId")
 	public Device queryDeviceByDeviceIdHandler(String deviceId) {
-
 		return deviceRepository.findByDid(deviceId);
-	
 	}
 	
 	@ResponseBody
@@ -117,11 +111,26 @@ public class DeviceHandler {
 	 * 读取时间
 	 */
 	@ResponseBody
-	@RequestMapping("/ReadTime")
-	public LocalDateTime readTimeHandler(String deviceId){
+	@RequestMapping("/DeviceReadTime")
+	public LocalDateTime deviceReadTimeHandler(String deviceId){
 
 		deviceService.refreshDeviceOnLineStatusService(deviceId);
 		LocalDateTime localDateTime = LocalDateTime.now();
 		return localDateTime;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/DeviceQueryDeviceByDeviceId", produces = "application/json;charset=utf-8")
+	public Device deviceQueryDeviceByDeviceIdHandler(String deviceId) {
+		Device device = deviceRepository.findByDid(deviceId);
+		
+		//去掉设备类型数据，减小数据量
+		device.setDeviceType(null);
+		
+		System.out.println(device.getDepartment().getName());
+		
+		//去掉操作人的部门信息，减小数据量
+
+		return device;
 	}
 }

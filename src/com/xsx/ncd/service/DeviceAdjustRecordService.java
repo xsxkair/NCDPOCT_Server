@@ -34,21 +34,23 @@ public class DeviceAdjustRecordService {
 	@Autowired DeviceRepository deviceRepository;
 	@Autowired OperatorRepository operatorRepository;
 	
-	public String upLoadDeviceAdjustRecordHandler(DeviceAdjustRecord deviceAdjustRecord, String deviceId,
-			Integer operatorId){
+	public DeviceAdjustRecord upLoadDeviceAdjustRecordHandler(DeviceAdjustRecord deviceAdjustRecord, String deviceId,
+			String operatorName){
 		
-		Operator operator = operatorRepository.findOne(operatorId);
+		
 		Device device = deviceRepository.findByDid(deviceId);
 		
 		if(device == null)
-			return "Fail, Device is not exist!";
+			return null;
+		
+		Operator operator = operatorRepository.findByDepartmentAndName(device.getDepartment(), operatorName);
 		
 		deviceAdjustRecord.setDevice(device);
 		deviceAdjustRecord.setOperator(operator);
 		
 		deviceAdjustRecordRepository.save(deviceAdjustRecord);
 		
-		return "Success";
+		return deviceAdjustRecord;
 	}
 	
 	public RecordJson<AdjustRecordItem> queryDeviceAdjustRecordService(Date date, String operatorName, String deviceId,
