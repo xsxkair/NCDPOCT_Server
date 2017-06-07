@@ -1,9 +1,10 @@
 package com.xsx.ncd.service;
 
+import java.sql.Timestamp;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.xsx.ncd.entity.Card;
 import com.xsx.ncd.entity.Device;
 import com.xsx.ncd.entity.Item;
 import com.xsx.ncd.entity.NCD_YGFXY;
@@ -25,27 +26,57 @@ public class NCD_YGFXYService {
 	@Autowired DeviceTypeRepository deviceTypeRepository;
 	@Autowired CardRepository cardRepository;
 	
-	public String upLoadYGFXYDataService(NCD_YGFXY ncd_YGFXY, String itemCode, Integer userId, String deviceId){
-		Item item = itemRepository.findByCode(itemCode);
-		Operator operator = operatorRepository.findOne(userId);
-		Device device = deviceRepository.findByDid(deviceId);
+	public NCD_YGFXY upLoadYGFXYDataService(NCD_YGFXY ncd_YGFXY){
+		Item item = null;
+		Operator operator = null;
+		Device device = null;
+
+		//根据数据序列号查看是否已存在,则覆盖老数据
+		NCD_YGFXY temp = ncd_YGFXYRepository.findBySerialnum(ncd_YGFXY.getSerialnum());
+		if(temp != null){	
+			ncd_YGFXY.setId(temp.getId());
+		}
 		
-		if(item == null)
-			return "Fail, Item is not exist!";
+		try {
+			device = deviceRepository.findByDid(ncd_YGFXY.getDevice().getDid());
+		} catch (Exception e) {
+			// TODO: handle exception
+			device = null;
+		}
 		
-		if(operator == null)
-			return "Fail, Operator is not exist!";
+		try {
+			item = itemRepository.findByCode(ncd_YGFXY.getItem().getCode());
+		} catch (Exception e) {
+			// TODO: handle exception
+			item = null;
+		}
+		
+		try {
+			operator = operatorRepository.findByDepartmentAndName(device.getDepartment(), ncd_YGFXY.getOperator().getName());
+		} catch (Exception e) {
+			// TODO: handle exception
+			operator = null;
+		}
 		
 		if(device == null)
-			return "Fail, Device is not exist!";
+			return null;
+		
+		if(item == null)
+			return null;
 		
 		ncd_YGFXY.setOperator(operator);
 		ncd_YGFXY.setDevice(device);
 		ncd_YGFXY.setItem(item);
-		ncd_YGFXY.setReportresult("未审核");
+		ncd_YGFXY.setUptime(new Timestamp(System.currentTimeMillis()));
 		
 		ncd_YGFXYRepository.save(ncd_YGFXY);
 		
-		return "Success!";
+		//减小回传的数据量，设置设备为null，操作人为null，项目为null，曲线为null
+		ncd_YGFXY.setOperator(null);
+		ncd_YGFXY.setDevice(null);
+		ncd_YGFXY.setItem(null);
+		ncd_YGFXY.setSeries(null);
+		
+		return ncd_YGFXY;
 	}
 }

@@ -69,9 +69,12 @@ public class NCD_YGFXY {
 	
 	private java.sql.Timestamp handltime;
 	
-	private String reportresult;
+	private Boolean reportisok;
 	
 	private String reportdsc;
+	
+	@Column(nullable=false, length=32, unique=true)
+	private String serialnum;										//唯一序列号，标志数据唯一性,针对荧光分析仪推荐使用批号加批内编号
 
 	public Integer getId() {
 		return id;
@@ -233,12 +236,12 @@ public class NCD_YGFXY {
 		this.handltime = handltime;
 	}
 
-	public String getReportresult() {
-		return reportresult;
+	public Boolean getReportisok() {
+		return reportisok;
 	}
 
-	public void setReportresult(String reportresult) {
-		this.reportresult = reportresult;
+	public void setReportisok(Boolean reportisok) {
+		this.reportisok = reportisok;
 	}
 
 	public String getReportdsc() {
@@ -247,5 +250,13 @@ public class NCD_YGFXY {
 
 	public void setReportdsc(String reportdsc) {
 		this.reportdsc = reportdsc;
+	}
+
+	public String getSerialnum() {
+		return serialnum;
+	}
+
+	public void setSerialnum(String serialnum) {
+		this.serialnum = serialnum;
 	}	
 }

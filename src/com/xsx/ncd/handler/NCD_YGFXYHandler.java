@@ -17,10 +17,10 @@ public class NCD_YGFXYHandler {
 	@Autowired NCD_YGFXYRepository ncd_YGFXYRepository;
 	
 	@ResponseBody
-	@RequestMapping("/YGFXY_Data")
-	public String upLoadYGFXYDataHandler(NCD_YGFXY ncd_YGFXY, String itemCode, Integer userId, String deviceId){
+	@RequestMapping("/upLoadYGFXY_Data")
+	public NCD_YGFXY upLoadYGFXYDataHandler(NCD_YGFXY ncd_YGFXY){
 
-		return ncd_YGFXYService.upLoadYGFXYDataService(ncd_YGFXY, itemCode, userId, deviceId);
+		return ncd_YGFXYService.upLoadYGFXYDataService(ncd_YGFXY);
 	}
 	
 	@ResponseBody
@@ -32,10 +32,14 @@ public class NCD_YGFXYHandler {
 	
 	@ResponseBody
 	@RequestMapping("/SaveNcdYGFXYReport")
-	public String saveNcdYGFXYReportHandler(@RequestBody NCD_YGFXY report){
+	public NCD_YGFXY saveNcdYGFXYReportHandler(@RequestBody NCD_YGFXY report){
 
-		ncd_YGFXYRepository.save(report);
-		
-		return "Success";
+		try {
+			ncd_YGFXYRepository.save(report);
+			return report;
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
 	}
 }

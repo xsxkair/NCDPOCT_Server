@@ -19,10 +19,9 @@ public class DeviceAdjustRecordHandler {
 	
 	@ResponseBody
 	@RequestMapping("/UpLoadDeviceAdjust")
-	public DeviceAdjustRecord upLoadDeviceAdjustRecordHandler(DeviceAdjustRecord deviceAdjustRecord, String deviceId,
-			String operatorName){
+	public DeviceAdjustRecord upLoadDeviceAdjustRecordHandler(DeviceAdjustRecord deviceAdjustRecord){
 		
-		return deviceAdjustRecordService.upLoadDeviceAdjustRecordHandler(deviceAdjustRecord, deviceId, operatorName);
+		return deviceAdjustRecordService.upLoadDeviceAdjustRecordHandler(deviceAdjustRecord);
 	}
 	
 	@ResponseBody

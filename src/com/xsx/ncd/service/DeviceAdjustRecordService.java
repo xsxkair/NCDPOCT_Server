@@ -34,22 +34,28 @@ public class DeviceAdjustRecordService {
 	@Autowired DeviceRepository deviceRepository;
 	@Autowired OperatorRepository operatorRepository;
 	
-	public DeviceAdjustRecord upLoadDeviceAdjustRecordHandler(DeviceAdjustRecord deviceAdjustRecord, String deviceId,
-			String operatorName){
-		
-		
-		Device device = deviceRepository.findByDid(deviceId);
+	public DeviceAdjustRecord upLoadDeviceAdjustRecordHandler(DeviceAdjustRecord deviceAdjustRecord){
+		Operator operator = null;
+		Device device = deviceRepository.findByDid(deviceAdjustRecord.getDevice().getDid());
 		
 		if(device == null)
 			return null;
 		
-		Operator operator = operatorRepository.findByDepartmentAndName(device.getDepartment(), operatorName);
+		try {
+			operator = operatorRepository.findByDepartmentAndName(device.getDepartment(), deviceAdjustRecord.getOperator().getName());
+		} catch (Exception e) {
+			// TODO: handle exception
+			operator = null;
+		}
 		
 		deviceAdjustRecord.setDevice(device);
 		deviceAdjustRecord.setOperator(operator);
 		
 		deviceAdjustRecordRepository.save(deviceAdjustRecord);
 		
+		//去掉返回值中的设备和操作人，以便减小数据量，这里去掉与数据库 中的数据无关
+		deviceAdjustRecord.setDevice(null);
+		deviceAdjustRecord.setOperator(null);
 		return deviceAdjustRecord;
 	}
 	
